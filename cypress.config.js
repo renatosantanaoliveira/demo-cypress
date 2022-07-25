@@ -5,7 +5,7 @@ module.exports = defineConfig({
   defaultCommandTimeout: 6000,
   viewportWidth: 1024,
   viewportHeight: 800,
-  projectId: 'xxxx',
+  projectId: "bwg2kn",
 
   e2e: {
     baseUrl: 'http://automationpractice.com',

@@ -1,0 +1,35 @@
+name: Cypress CI
+on:
+  pull_request:
+    branches: [ master, develop ]
+    
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Selecionar algum destes browsers: chrome / electron'
+        required: false
+        default: 'chrome'
+    
+env:
+  DEFAULT_KEY: "d0e787bc-eba9-464d-88cb-a04b154b261f"
+  DEFAULT_BROWSER: "chrome"
+  DEFAULT_GROUP: "CI"
+
+jobs:
+  cypress-run-tests:
+    name: Cypress run
+    runs-on: ubuntu-latest
+    container: cypress/browsers:node14.17.0-chrome91-ff89
+    strategy:
+      fail-fast: false
+      matrix:
+        # run copies of the current job in parallel
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cypress run tests
+        uses: cypress-io/github-action@v2
+        with: 
+          command: npx cypress run --record --parallel --group ${{env.DEFAULT_GROUP}} --key ${{env.DEFAULT_KEY}} --browser ${{github.event.inputs.browser || env.DEFAULT_BROWSER}}
