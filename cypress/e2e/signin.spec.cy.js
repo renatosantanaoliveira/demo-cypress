@@ -9,13 +9,18 @@ describe("Sign In", () => {
     const user = {
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        email: faker.internet.email()
+        email: faker.internet.email(),
+        address: faker.address.streetAddress(),
+        city: faker.address.city(),
+        zipCode: faker.address.zipCode(),
+        phoneMobile: faker.phone.number(),
+        aliasRefer: faker.address.secondaryAddress()
     }
 
     cy.get("#email_create").type(user.email)
-    cy.get("#SubmitCreate").click()
+    cy.get("#SubmitCreate", {timeout: 6000}).click()
 
-    cy.get("#id_gender1", {timeout: 6000}).click()
+    cy.get("#id_gender1", {timeout: 10000}).click()
     cy.get("#customer_firstname").type(user.firstName)
     cy.get("#customer_lastname").type(user.lastName)
     cy.get("#email", {timeout: 6000}).then((value) => {
@@ -29,6 +34,18 @@ describe("Sign In", () => {
     cy.get('#years').select(yearBirthday).then((text) => {
         expect(text.text()).to.have.string(yearBirthday)
     })
-    cy.get('#firstname').type(faker.name.firstName())
+    cy.get('#firstname').type(user.firstName)
+    cy.get('#lastname').type(user.lastName)
+    cy.get('#address1').type(user.address)
+    cy.get('#city').type(user.city)
+    cy.get('#id_state', {timeout: 6000}).select('Arizona')
+    cy.get('#postcode').type(user.zipCode)
+    cy.get('#id_country', {timeout: 6000}).select('United States')
+    cy.get('#phone_mobile').type(user.phoneMobile)
+    cy.get('#alias').type(user.aliasRefer)
+    cy.get('#submitAccount', {timeout: 6000}).click()
+
+    cy.get('.page-heading', {timeout: 6000}).should('contain.text', 'My account')
+    cy.get('.account > span').should('have.text', `${user.firstName} ${user.lastName}`)
   })
 })
