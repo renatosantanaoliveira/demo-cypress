@@ -6,7 +6,7 @@ import account from "../support/account/account.page";
 
 describe("Sign In", () => {
   before(() => {
-    cy.navigate("index.php?controller=authentication&back=my-account");
+    cy.navigate("/index.php?controller=authentication&back=my-account");
   });
   it("Scenario 01: Sign up user", () => {
     const email = faker.internet.email();
