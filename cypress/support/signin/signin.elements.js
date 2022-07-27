@@ -1,0 +1,20 @@
+export const signinElements = {
+    email_create: '#email_create',
+    email: '#email',
+    btn_create_user: '#SubmitCreate',
+    gender: '#id_gender1',
+    first_name: '#customer_firstname',
+    last_name: '#customer_lastname',
+    password: '#passwd',
+    day_bht:'#days',
+    month_bth: '#months',
+    year_bth: '#years',
+    address_one: '#address1',
+    address_two: '#alias',
+    city: '#city',
+    state: '#id_state',
+    zip: '#postcode',
+    country: '#id_country',
+    phone_mobile: '#phone_mobile',
+    btn_submit_account: '#submitAccount'
+}
