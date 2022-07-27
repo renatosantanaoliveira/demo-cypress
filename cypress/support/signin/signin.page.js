@@ -54,7 +54,7 @@ class SignInPage {
 
   validateRegisterSuccessfully() {
     cy.get(elAccount.head.profile_user).should(
-      "have.text",
+      "contain.text",
       `${user.firstName} ${user.lastName}`
     );
   }
